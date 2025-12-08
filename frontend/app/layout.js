@@ -12,8 +12,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Arcade Queue System",
-  description: "Next Js + Laravel Queue System",
+  title: "Jogja MyMy Queue",
+  description: "On spot queue management app for MyMy",
 };
 
 export default function RootLayout({ children }) {

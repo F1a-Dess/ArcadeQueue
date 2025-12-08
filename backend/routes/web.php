@@ -5,7 +5,7 @@ use App\Http\Controllers\Api\QueueController;
 use App\Http\Controllers\Api\CabinetController;
 
 Route::get('/', function () {
-    return view('Main Page');
+    return view('welcome');
 });
 
 // // Queue routes

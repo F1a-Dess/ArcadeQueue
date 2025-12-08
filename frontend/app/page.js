@@ -28,8 +28,8 @@ import {
 
 } from 'lucide-react'; // Icon library
 
-const TARGET_LAT = -6.226643; // Summarecon Mall Bekasi
-const TARGET_LON = 107.000782;
+const TARGET_LAT = -7.782357; // Amborukmo Plaza
+const TARGET_LON = 110.401167;
 
 // Gelocation config
 // coord define the central point of allowed editing area
@@ -38,9 +38,9 @@ const TARGET_LON = 107.000782;
 // dev loc
 // const TARGET_LAT = -6.265856; // Altitude not used in distance calc
 // const TARGET_LON = 106.944008; // Altitude not used in distance calc
-const MAX_DISTANCE_KM = 0.5; // 500 m radius
+const MAX_DISTANCE_KM = 9999; // 500 m radius
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000'; // Base URL for API
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL; // Base URL for API
 
 export default function ArcadeQueueApp() {
   
@@ -95,7 +95,7 @@ export default function ArcadeQueueApp() {
   // Check if the backend database is accessible
   const checkDbHealth = useCallback(async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/api/health`, { timeout: 5000 });
+      const response = await axios.get(`${API_BASE_URL}/api/health`, { timeout: 15000 }); // 15s timeout
       // If we get a 200-ish response, assume DB is connected
       if (response.status >= 200 && response.status < 300) {
         setIsDbConnected(true);
@@ -207,8 +207,8 @@ export default function ArcadeQueueApp() {
     checkGeolocation();
     // Check DB connection on mount
     checkDbHealth();
-    // Set up periodic health check every 5 seconds
-    const healthInterval = setInterval(checkDbHealth, 5000);
+    // Set up periodic health check every 7 minutes 27 seconds
+    const healthInterval = setInterval(checkDbHealth, 447000);
     return () => clearInterval(healthInterval);
   }, [checkGeolocation, checkDbHealth]);
 
@@ -369,34 +369,6 @@ export default function ArcadeQueueApp() {
 
     }
   };
-  
-  // In a real app, you would send an API request to "start" the game, 
-  // but based on your current backend logic, the first item in the list IS the current game.
-  // For now, we rely on the finishGame/cycle endpoint.
-  // If there is no currentSession (meaning queue_items[0] is not set), 
-  // but the queue is not empty, we need to call an endpoint to trigger the first item 
-  // to become current. Since you don't have a `start` endpoint, and your queue seems to 
-  // include the current session, this button is now redundant. 
-  // However, I'll keep the logic that exists in case you implement a separate list for 'now playing'.
-  // const startGame = async () => {
-    
-  //   if (queue.length === 0 || !selectedCabinetId) return;
-    
-    
-  //   // As a workaround, we'll force the next item to cycle if the current session is empty
-  //   const nextInQueue = queue[0];
-  //   if (nextInQueue) {
-  //      try {
-  //        // This assumes the backend handles the first item as the active session.
-  //        // If you have a separate API to promote a player, use that here.
-  //        // Since your queue data structure is currently undefined, I'll comment this out 
-  //        // and rely only on the 'finishGame' logic. 
-  //        console.log("Starting next game is typically handled by 'Finish Game' which cycles the list.");
-  //      } catch (error) {
-  //        console.error('Error starting game:', error);
-  //      }
-  //   }
-  // };
 
   // Finish the current game and cycle the queue
   const finishGame = async () => {
