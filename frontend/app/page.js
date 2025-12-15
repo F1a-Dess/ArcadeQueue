@@ -48,6 +48,10 @@ const MAX_DISTANCE_KM = 0.5; // 500 m radius
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL; // Base URL for API
 
+if (!API_BASE_URL) {
+  throw new Error('NEXT_PUBLIC_API_URL is not defined in environment variables');
+}
+
 export default function ArcadeQueueApp() {
   
   // --- State Management ---
@@ -73,8 +77,8 @@ export default function ArcadeQueueApp() {
   const [isDbConnected, setIsDbConnected] = useState(false); // Whether the system is connected to database
 
   // --- API Integration ---
-  const CABINET_API_URL = `${API_BASE_URL}/api/cabinets`;
-  const QUEUE_API_URL = `${API_BASE_URL}/api/queue`;
+  const CABINET_API_URL = `${process.env.NEXT_PUBLIC_API_URL}/api/cabinets`;
+  const QUEUE_API_URL = `${process.env.NEXT_PUBLIC_API_URL}/api/queue`;
 
   // --- Logging Helper ---
   // Useful helper to print axios error details (response / request / message)
