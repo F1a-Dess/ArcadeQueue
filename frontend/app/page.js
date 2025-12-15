@@ -44,7 +44,7 @@ const TARGET_LON = 110.401167;
 // const TARGET_LAT = -6.982970;
 // const TARGET_LON = 110.412266;
 
-const MAX_DISTANCE_KM = 0.5; // 500 m radius
+const MAX_DISTANCE_KM = 99999; // 500 m radius
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL; // Base URL for API
 
