@@ -28,17 +28,23 @@ import {
 
 } from 'lucide-react'; // Icon library
 
-const TARGET_LAT = -7.782357; // Amborukmo Plaza
-const TARGET_LON = 110.401167;
-
 // Gelocation config
 // coord define the central point of allowed editing area
 // only users within MAX_DISTANCE_KM can edit the queue
 
-// dev loc
+// local for testing
 // const TARGET_LAT = -6.265856; // Altitude not used in distance calc
 // const TARGET_LON = 106.944008; // Altitude not used in distance calc
-const MAX_DISTANCE_KM = 9999; // 500 m radius
+
+// Amborukmo Plaza
+const TARGET_LAT = -7.782357; 
+const TARGET_LON = 110.401167;
+
+// DP Mall Semarang 
+// const TARGET_LAT = -6.982970;
+// const TARGET_LON = 110.412266;
+
+const MAX_DISTANCE_KM = 0.5; // 500 m radius
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL; // Base URL for API
 
